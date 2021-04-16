@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.linear_model import LogisticRegression
-from data_model import DB, User, Tweet
+from .data_model import DB, User, Tweet
 import pandas as pd
 import spacy
 
