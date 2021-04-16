@@ -60,7 +60,7 @@ def create_app():
     @app.route('/predict_author', methods=['GET'])
     def predict_author():
         tweet_to_classify = request.args['tweet_to_classify']
-        return predict_most_likely_author(tweet_to_classify, ['cher', 'elonmusk', 'barackobama'])
+        return predict_most_likely_author(tweet_to_classify, ['cher', 'elonmusk', 'barackobama', 'johncena'])
 
     return app
 

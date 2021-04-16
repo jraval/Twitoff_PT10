@@ -13,16 +13,17 @@ def predict_most_likely_author(text, possible_authors):
 
     for i, author in enumerate(possible_authors):
         author = User.query.filter(User.name == author).one()
-        author_features = np.array([transformer(tweet).vector for tweet in author.tweets])
+        author_features = np.array([transformer(tweet.text).vector for tweet in author.tweets])
         author_target = np.zeros(len(author.tweets)) + i
         author_dataset = pd.DataFrame(author_features)
         author_dataset['target'] = author_target
-        df_dataset = pd.concat(author_dataset)
+        combined_list = [df_dataset, author_dataset]
+        df_dataset = pd.concat(combined_list)
 
     model = LogisticRegression()
     model.fit(df_dataset[[c for c in df_dataset.columns if not c is 'target']], df_dataset['target'])
-    most_likely_author_index = model.predict(transformer(text).vector)[0]
+    most_likely_author_index = model.predict([transformer(text).vector])[0]
 
-    return possible_authors[most_likely_author_index]
+    return possible_authors[int(most_likely_author_index)]
 
     # author_tweets = np.array([tweet for tweet in author.tweets])
