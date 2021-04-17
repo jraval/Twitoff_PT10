@@ -1,1 +1,1 @@
-web: gunicorn lambda3.3.1:APP -t 120 --log-file=- --log-level=debug
+web: gunicorn twitoff:APP -t 120 --log-file=- --log-level=debug

@@ -32,7 +32,7 @@ def create_app():
             # DB.session.add(app_user)
             # DB.session.commit()
             pass
-        with open('landing.json') as f:
+        with open('Twitoff_PT10/landing.json') as f:
             args = json.load(f)
         return render_template('base.html', **args)
 
