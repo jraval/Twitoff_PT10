@@ -4,7 +4,7 @@ from .data_model import DB, User, Tweet
 import pandas as pd
 import spacy
 
-transformer = spacy.load('./my_model')
+transformer = spacy.load('.twitoff/my_model')
 
 
 def predict_most_likely_author(text, possible_authors):

@@ -3,8 +3,8 @@
 from flask import Flask, render_template, request
 import json
 from .twitter import upsert_user
-from twitoff.data_model import DB, User, Tweet
-from twitoff.Users import user_list, tweet_list
+from .data_model import DB, User, Tweet
+from .Users import user_list, tweet_list
 from .ml import predict_most_likely_author
 from os import path
 
@@ -32,7 +32,7 @@ def create_app():
             # DB.session.add(app_user)
             # DB.session.commit()
             pass
-        with open('Twitoff_PT10/landing.json') as f:
+        with open('TwitoffPT10/landing.json') as f:
             args = json.load(f)
         return render_template('base.html', **args)
 
