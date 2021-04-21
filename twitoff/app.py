@@ -2,10 +2,10 @@
 
 from flask import Flask, render_template, request
 import json
-from .twitter import upsert_user
-from .data_model import DB, User, Tweet
-from .Users import user_list, tweet_list
-from .ml import predict_most_likely_author
+from twitoff.twitter import upsert_user
+from twitoff.data_model import DB, User, Tweet
+# from Users import user_list, tweet_list
+from twitoff.ml import predict_most_likely_author
 from os import path
 
 # from os import getenv
@@ -26,13 +26,13 @@ def create_app():
     def landing():
         if not path.exists(app.config['SQLALCHEMY_DATABASE_URI']):
             # DB.drop_all()
-            # DB.create_all()
-            # DB.session.add_all(user_list)
+            DB.create_all()
+            DB.session.add_all('cher', 'elonmusk', 'barackobama', 'johncena', 'ronaldreagan')
             # DB.session.commit()
             # DB.session.add(app_user)
             # DB.session.commit()
             pass
-        with open('TwitoffPT10/landing.json') as f:
+        with open('landing.json') as f:
             args = json.load(f)
         return render_template('base.html', **args)
 
@@ -60,10 +60,10 @@ def create_app():
     @app.route('/predict_author', methods=['GET'])
     def predict_author():
         tweet_to_classify = request.args['tweet_to_classify']
-        return predict_most_likely_author(tweet_to_classify, ['cher', 'elonmusk', 'barackobama', 'johncena'])
+        return predict_most_likely_author(tweet_to_classify, ['cher', 'elonmusk', 'barackobama', 'johncena', 'ronaldreagan'])
 
     return app
 
 
-# if __name__ == "__main__":
-#    create_app().run(host='127.0.0.1', port=8000)
+if __name__ == "__main__":
+    create_app().run(host='127.0.0.1', port=8000)
